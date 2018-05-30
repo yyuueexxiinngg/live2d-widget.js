@@ -46,8 +46,9 @@ let opacityHover = 1;
  * @return {null}
  */
 
-function theRealInit (){
+function theRealInit (jsonPath){
 
+  Live2D.dispose();
   createElement();
   initEvent();
 
@@ -77,7 +78,11 @@ function theRealInit (){
 
   Live2D.setGL(currWebGL);
   currWebGL.clearColor(0.0, 0.0, 0.0, 0.0);
-  changeModel(config.model.jsonPath);
+  if(jsonPath){
+    changeModel(jsonPath);
+  }else {
+    changeModel(config.model.jsonPath);
+  }
   startDraw();
 
 
@@ -169,11 +174,25 @@ function draw()
     MatrixStack.pop();
 }
 
-function changeModel(modelurl) // 更换模型
-{
+function doCustomAction(action){
+    live2DMgr.customAction(action);
+}
+
+// function changeModel(modelurl) // 更换模型
+// {
+//     live2DMgr.reloadFlg = true;
+//     live2DMgr.count++; // 现在仍有多模型支持，稍后可以精简
+//     live2DMgr.changeModel(currWebGL, modelurl);
+// }
+
+function changeModel(jsonPath,userConfig) {
+  if(!userConfig){
     live2DMgr.reloadFlg = true;
     live2DMgr.count++; // 现在仍有多模型支持，稍后可以精简
-    live2DMgr.changeModel(currWebGL, modelurl);
+    live2DMgr.changeModel(currWebGL, jsonPath);
+  }else {
+    theRealInit(jsonPath);
+  }
 }
 
 function modelScaling(scale) {
@@ -425,4 +444,7 @@ function transformScreenY(deviceY)
 export{
   theRealInit,
   captureFrame,
+  doCustomAction,
+  changeModel,
+  startDraw,
 }

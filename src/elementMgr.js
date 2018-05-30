@@ -5,6 +5,7 @@
 
 import { config } from './config/configMgr';
 import htmlTemplate from './tmplate/innerHTML';
+import {initMessage} from "./utils/message";
 
 /**
  * The current WebGL element
@@ -54,7 +55,7 @@ function createElement(){
   currCanvas = document.getElementById(config.name.canvas);
 
   initWebGL();
-
+  initMessage();
 }
 
 /**

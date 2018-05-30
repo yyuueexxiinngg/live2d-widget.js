@@ -13,6 +13,9 @@
 
 import device from 'current-device';
 import { config, configApplyer }from './config/configMgr';
+import { cManager } from './cManager';
+import './utils/message'
+import {showMessage} from "./utils/message";
 
 if (process.env.NODE_ENV === 'development'){
   console.log('--- --- --- --- ---\nLive2Dwidget: Hey that, notice that you are now in DEV MODE.\n--- --- --- --- ---');
@@ -67,7 +70,18 @@ class L2Dwidget{
     });
   }
 
+  showMessage(content,timeout){
+    return showMessage(content,timeout);
+  }
 
+  changeModel(modelUrl,userConfig = {}){
+    configApplyer(userConfig);
+    return coreApp.changeModel(modelUrl,userConfig);
+  }
+
+  doCustomAction(action){
+    return coreApp.doCustomAction(action);
+  }
 /**
  * Capture current frame to png file {@link captureFrame}
  * @param  {Function} callback The callback function which will receive the current frame
@@ -95,12 +109,10 @@ class L2Dwidget{
       }
     );
   }
-
 };
 
 let _ = new L2Dwidget();
 
-
 export {
-  _ as L2Dwidget,
+  _ as live2d,
 }

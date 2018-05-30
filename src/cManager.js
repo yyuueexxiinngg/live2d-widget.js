@@ -14,6 +14,25 @@ function cManager() {
 
 }
 
+cManager.prototype.customAction = function(action){
+  for (var i = 0; i < this.models.length; i++) {
+
+    if(action == "flick_head"){
+      this.models[i].startRandomMotion(cDefine.MOTION_GROUP_FLICK_HEAD,
+        cDefine.PRIORITY_NORMAL);
+    }else if (action == "shake") {
+
+      if (cDefine.DEBUG_LOG)
+        console.log("Tap face." + " models[" + i + "]");
+
+      this.models[i].startRandomMotion(cDefine.MOTION_GROUP_SHAKE,
+        cDefine.PRIORITY_NORMAL);
+    }
+  }
+  return true;
+}
+
+
 cManager.prototype.createModel = function () {
 
   var model = new cModel();
@@ -73,30 +92,63 @@ cManager.prototype.setDrag = function (x, y) {
 }
 
 cManager.prototype.tapEvent = function (x, y) {
-  if (cDefine.DEBUG_LOG)
-    console.log("tapEvent view x:" + x + " y:" + y);
+  if(x <=1 && y <=1){
+    if (cDefine.DEBUG_LOG)
+      console.log("tapEvent view x:" + x + " y:" + y);
 
-  for (var i = 0; i < this.models.length; i++) {
+    for (var i = 0; i < this.models.length; i++) {
 
-    if (this.models[i].hitTest(cDefine.HIT_AREA_HEAD, x, y)) {
+      if (this.models[i].hitTest(cDefine.HIT_AREA_HEAD, x, y)) {
 
-      if (cDefine.DEBUG_LOG)
-        console.log("Tap face.");
+        if (cDefine.DEBUG_LOG)
+          console.log("Tap head.");
 
-      this.models[i].setRandomExpression();
-    }
-    else if (this.models[i].hitTest(cDefine.HIT_AREA_BODY, x, y)) {
+        this.models[i].setRandomExpression();
+      }else if (this.models[i].hitTest(cDefine.HIT_AREA_BODY, x, y)) {
 
-      if (cDefine.DEBUG_LOG)
-        console.log("Tap body." + " models[" + i + "]");
+        if (cDefine.DEBUG_LOG)
+          console.log("Tap body." + " models[" + i + "]");
 
-      this.models[i].startRandomMotion(cDefine.MOTION_GROUP_TAP_BODY,
-        cDefine.PRIORITY_NORMAL);
+        this.models[i].startRandomMotion(cDefine.MOTION_GROUP_TAP_BODY,
+          cDefine.PRIORITY_NORMAL);
+      }else if (this.models[i].hitTest(cDefine.HIT_AREA_BREAST, x, y)) {
+
+        if (cDefine.DEBUG_LOG)
+          console.log("Tap breast." + " models[" + i + "]");
+
+        this.models[i].startRandomMotion(cDefine.MOTION_GROUP_TAP_BREAST,
+          cDefine.PRIORITY_NORMAL);
+      }else if (this.models[i].hitTest(cDefine.HIT_AREA_BELLY, x, y)) {
+
+        if (cDefine.DEBUG_LOG)
+          console.log("Tap belly." + " models[" + i + "]");
+
+        this.models[i].startRandomMotion(cDefine.MOTION_GROUP_TAP_BELLY,
+          cDefine.PRIORITY_NORMAL);
+      }else if (this.models[i].hitTest(cDefine.HIT_AREA_LEG, x, y)) {
+
+        if (cDefine.DEBUG_LOG)
+          console.log("Tap leg." + " models[" + i + "]");
+
+        this.models[i].startRandomMotion(cDefine.MOTION_GROUP_TAP_LEG,
+          cDefine.PRIORITY_NORMAL);
+      }else if (this.models[i].hitTest(cDefine.HIT_AREA_FACE, x, y)) {
+
+        if (cDefine.DEBUG_LOG)
+          console.log("Tap face." + " models[" + i + "]");
+
+        this.models[i].startRandomMotion(cDefine.MOTION_GROUP_TAP_FACE,
+          cDefine.PRIORITY_NORMAL);
+      }
     }
   }
 
+
+
   return true;
 };
+
+
 
 export{
   cManager,

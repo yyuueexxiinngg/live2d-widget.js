@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Live2DFramework, L2DBaseModel, L2DEyeBlink } from "./lib/Live2DFramework";
 import { ModelSettingJson } from "./utils/ModelSettingJson";
 import { MatrixStack } from "./utils/MatrixStack";
@@ -17,6 +18,7 @@ import { UtSystem,/*
          DrawDataID,
          BaseDataID,
          ParamID*/ } from './lib/live2d.core';
+import {showMessage} from "./utils/message"
 //============================================================
 //============================================================
 //  class cModel     extends L2DBaseModel
@@ -187,7 +189,6 @@ cModel.prototype.load = function(gl, modelSettingPath, callback)
 };
 
 
-
 cModel.prototype.release = function(gl)
 {
     // this.live2DModel.deleteTextures();
@@ -232,7 +233,6 @@ cModel.prototype.update = function()
 
     if (this.mainMotionManager.isFinished())
     {
-
         this.startRandomMotion(cDefine.MOTION_GROUP_IDLE, cDefine.PRIORITY_IDLE);
     }
 
@@ -399,7 +399,11 @@ cModel.prototype.setFadeInFadeOut = function(name, no, priority, motion)
 
     if (this.modelSetting.getMotionSound(name, no) == null)
     {
+      if(this.modelSetting.getMotionText(name, no) == null){
         this.mainMotionManager.startMotionPrio(motion, priority);
+      }else {
+        this.mainMotionManager.startMotionPrio(motion, priority);
+      }
     }
     else
     {
@@ -411,9 +415,22 @@ cModel.prototype.setFadeInFadeOut = function(name, no, priority, motion)
 
         if (cDefine.DEBUG_LOG)
             console.log("Start sound : " + soundName);
+      var duraiton = 5000;
 
+      if($('#mute-btn').attr('mute') == 'false')
         snd.play();
+
+      if(this.modelSetting.getMotionText(name, no) == null){
         this.mainMotionManager.startMotionPrio(motion, priority);
+      }else {
+        var text = this.modelSetting.getMotionText(name, no);
+        text = decodeURI(text);
+        snd.onloadedmetadata = function () {
+          duraiton = snd.duration * 1000;
+          showMessage(text,duraiton)
+        }
+        this.mainMotionManager.startMotionPrio(motion, priority);
+      }
     }
 }
 
@@ -423,10 +440,13 @@ cModel.prototype.setExpression = function(name)
 {
     var motion = this.expressions[name];
 
-    if (cDefine.DEBUG_LOG)
-        console.log("Expression : " + name);
-
+    if (cDefine.DEBUG_LOG) {
+      console.log("Expression : " + name);
+    }
+  try{
     this.expressionManager.startMotion(motion, false);
+    }catch (err){
+    }
 }
 
 
@@ -460,7 +480,6 @@ cModel.prototype.hitTest = function(id, testX, testY)
         if (id == this.modelSetting.getHitAreaName(i))
         {
             var drawID = this.modelSetting.getHitAreaID(i);
-
             return this.hitTestSimple(drawID, testX, testY);
         }
     }

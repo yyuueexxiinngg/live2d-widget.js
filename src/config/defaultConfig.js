@@ -24,23 +24,23 @@ const defaultConfig = {
     vOffset: -20,
   },
   mobile: {
-    show: true,
+    show: false,
     scale: 0.5,
-    motion: true,
+    motion: false,
   },
   name: {
     canvas: 'live2dcanvas',
-    div: 'live2d-widget',
+    div: 'live2d',
   },
   react: {
-    opacityDefault: 0.7,
+    opacityDefault: 1,
     opacityOnHover: 0.2,
     myFunc: (e) => {console.log('(undefined) ┑(￣Д ￣)┍');},
   },
   dev: {
-    log: false,
+    log: true,
     border: (process.env.NODE_ENV === 'development' ? true : false),
-    mouseLog: false,
+    mouseLog: true,
     mouseFunc: (x, y, ix, iy) => {console.log(`MouseFunc: ${x},${y}; ${ix}, ${iy}`);},
   },
 }

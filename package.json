@@ -27,12 +27,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xiazeyu/live2d-widget.js.git"
+    "url": "git+https://github.com/yyuueexxiinngg/live2d-widget.js.git"
   },
   "author": "xiazeyu <xiazeyu_2011@126.com>",
   "contributors": [
     "xiazeyu <xiazeyu_2011@126.com>",
-    "EYHN <cneyhn@gmail.com>"
+    "EYHN <cneyhn@gmail.com>",
+    "yyuueexxiinngg <yyuueexxiinngg@outlook.com>"
   ],
   "maintainers": [
     "xiazeyu <xiazeyu_2011@126.com>",
@@ -42,7 +43,7 @@
   "bugs": {
     "url": "https://github.com/xiazeyu/live2d-widget.js/issues"
   },
-  "homepage": "https://github.com/xiazeyu/live2d-widget.js#readme",
+  "homepage": "https://github.com/yyuueexxiinngg/live2d-widget.js#readme",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",

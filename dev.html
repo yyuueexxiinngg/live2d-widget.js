@@ -1,15 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Live2d Test Env</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
-  <script src="lib/L2Dwidget.min.js"></script>
-  <script type="text/javascript">
-    L2Dwidget.init();
-  </script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <title>Live2d Test Env</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <link rel="stylesheet" href="live2d/css/live2d.css">
+</head>
+<body>
+<script type="text/javascript">
+  var message_Path = '/live2d/'
+  var home_Path = 'https://www.mihoyo.tech/'
+</script>
+<script src="lib/live2d.min.js"></script>
+<script type="text/javascript">
+  live2d.init({
+    model: {
+      jsonPath: "/live2d/model/kaguya_xcpx/model.json"
+    },
+    display: {
+      width: 250,
+      height: 300,
+      hOffset: -80,
+      vOffset: -200
+    },
+  });
+</script>
+</body>
 </html>

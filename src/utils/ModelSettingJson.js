@@ -31,6 +31,7 @@ export function ModelSettingJson()
     this.INIT_PARTS_VISIBLE = "init_parts_visible";
     this.VALUE = "val";
     this.FILE = "file";
+    this.TEXT = "text";
     this.json = {};
 }
 
@@ -51,6 +52,26 @@ ModelSettingJson.prototype.loadModelSetting = function(path, callback)
         callback();
     });
 };
+
+/**
+ * @name getTextureFile
+ * @desc get texture file from json
+ * @param {int} order number of texture
+ * @returns {string} file path
+ * @memberOf ModelSettingJson
+ */
+ModelSettingJson.prototype.getMotionText = function(name, n)
+{
+  if (this.json[this.MOTION_GROUPS] == null ||
+    this.json[this.MOTION_GROUPS][name] == null ||
+    this.json[this.MOTION_GROUPS][name][n] == null ||
+    this.json[this.MOTION_GROUPS][name][n][this.TEXT] == null)
+    return null;
+
+  return this.json[this.MOTION_GROUPS][name][n][this.TEXT];
+}
+
+
 
 /**
 * @name getTextureFile

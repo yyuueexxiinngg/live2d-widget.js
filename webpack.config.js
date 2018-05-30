@@ -16,11 +16,11 @@ module.exports = env => {return{
   ],
 
   output: {
-    filename: 'L2Dwidget.min.js',
+    filename: 'live2d.min.js',
     // YOU MUST INSTALL babel-plugin-syntax-dynamic-import FIRST TO ENABLE CODE SPLITTING!
-    chunkFilename: 'L2Dwidget.[id].min.js',
-    library: 'L2Dwidget',
-    libraryExport: 'L2Dwidget',
+    chunkFilename: 'live2d.[id].min.js',
+    library: 'live2d',
+    libraryExport: 'live2d',
     libraryTarget: 'var',
     path: path.resolve(__dirname, 'lib'),
     pathinfo: (isProd(env) ? false : true),
@@ -54,7 +54,7 @@ module.exports = env => {return{
       },
     }),
     // Banner must be put below UglifyJsPlugin, or it won't work.
-    new webpack.BannerPlugin(`${isProd(env) ? '' : '___DEV___'}https://github.com/xiazeyu/live2d-widget.js built@${nowDate.toLocaleDateString()} ${nowDate.toLocaleTimeString()}`),
+    new webpack.BannerPlugin(`${isProd(env) ? '' : '___DEV___'}https://github.com/yyuueexxiinngg/live2d-widget.js built@${nowDate.toLocaleDateString()} ${nowDate.toLocaleTimeString()}`),
     /**
      * Webpack Manifest Plugin
      * https://github.com/danethurber/webpack-manifest-plugin
